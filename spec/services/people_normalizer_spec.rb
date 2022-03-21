@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Services::PeopleNormalizer do
-  let(:service) { described_class.new(params) }
+  let(:service) { described_class.new(**params) }
 
   let(:params) do
     { data: [person_1, person_2] }

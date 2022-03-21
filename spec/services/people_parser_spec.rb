@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Services::PeopleParser do
-  let(:service) { described_class.new(params) }
+  let(:service) { described_class.new(**params) }
   let(:params) { { data: data, separator: separator } }
 
   let(:data) { "first_name % city % birthdate\nMckayla % Atlanta % 1986-05-29" }

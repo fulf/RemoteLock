@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Models::Person do
-  let(:instance) { described_class.new(params) }
+  let(:instance) { described_class.new(**params) }
   let(:params) do
     {
       first_name: 'Foo',

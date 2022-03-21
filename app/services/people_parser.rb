@@ -9,6 +9,12 @@ module Services
       NYC: 'New York City'
     }.freeze
 
+    DATE_FORMATS_FOR_SEPARATOR = {
+      ' $ ': '%d-%m-%Y',
+      ' % ': '%Y-%m-%d',
+      ' | ': '%m.%d.%Y'
+    }.freeze
+
     def initialize(data:, separator:)
       @data = data
       @separator = separator
@@ -20,7 +26,7 @@ module Services
           first_name: row['first_name'],
           last_name: row['last_name'],
           city: normalized_city(row['city']),
-          birthdate: parsed_date(row['birthdate'])
+          birthdate: parsed_date(row['birthdate'], @separator)
         )
       end
     end
@@ -31,8 +37,8 @@ module Services
       CSV.parse(@data, headers: true, col_sep: @separator)
     end
 
-    def parsed_date(date)
-      Date.parse(date)
+    def parsed_date(date, separator)
+      Date.strptime(date, DATE_FORMATS_FOR_SEPARATOR[separator.to_sym])
     rescue ArgumentError
       nil
     end
